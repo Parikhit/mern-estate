@@ -4,7 +4,14 @@ import { useRef, useState, useEffect } from 'react';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase.js';
 
-import { updateUserStart, updateUserSuccess, updateUserFailure } from '../redux/user/userSlice.js';
+import {
+    updateUserStart,
+    updateUserSuccess,
+    updateUserFailure,
+    deleteUserStart,
+    deleteUserSuccess,
+    deleteUserFailure,
+} from '../redux/user/userSlice.js';
 
 import { useDispatch } from 'react-redux';
 
@@ -80,6 +87,23 @@ const Profile = () => {
         }
     };
 
+    const handleDeleteUser = async () => {
+        try {
+            dispatch(deleteUserStart());
+            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+                method: 'DELETE',
+            });
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(deleteUserFailure(data.message));
+                return;
+            }
+            dispatch(deleteUserSuccess(data));
+        } catch (error) {
+            dispatch(deleteUserFailure(error.message));
+        }
+    };
+
     return (
         <div className='p-3 max-w-lg mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-8'>Profile</h1>
@@ -145,11 +169,13 @@ const Profile = () => {
             </form>
 
             <div className='flex justify-between mt-5'>
-                <span className='text-red-700 text-lg cursor-pointer'>Delete Account</span>
+                <span onClick={handleDeleteUser} className='text-red-700 text-lg cursor-pointer'>
+                    Delete Account
+                </span>
                 <span className='text-red-700 text-lg cursor-pointer'>Sign Out</span>
             </div>
             <p className='text-center text-red-700 mt-4'>{error ? error : ''}</p>
-            <p className='text-center text-green-700 mt-4'>
+            <p className='text-center text-green-500 mt-4'>
                 {updateSuccess ? 'User is updated successfully!' : ''}
             </p>
         </div>
