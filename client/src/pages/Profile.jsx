@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase.js';
@@ -127,7 +128,10 @@ const Profile = () => {
         <div className='p-3 max-w-lg mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-8'>Profile</h1>
 
-            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <form
+                onSubmit={handleSubmit}
+                className='flex flex-col gap-4'
+            >
                 <input
                     onChange={(e) => setFile(e.target.files[0])}
                     type='file'
@@ -185,13 +189,25 @@ const Profile = () => {
                 >
                     {loading ? 'Loading...' : 'Update'}
                 </button>
+                <Link
+                    className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
+                    to='/create-listing'
+                >
+                    Create Listing
+                </Link>
             </form>
 
             <div className='flex justify-between mt-5'>
-                <span onClick={handleDeleteUser} className='text-red-700 text-lg cursor-pointer'>
+                <span
+                    onClick={handleDeleteUser}
+                    className='text-red-700 text-lg cursor-pointer'
+                >
                     Delete Account
                 </span>
-                <span onClick={handleSignOut} className='text-red-700 text-lg cursor-pointer'>
+                <span
+                    onClick={handleSignOut}
+                    className='text-red-700 text-lg cursor-pointer'
+                >
                     Sign Out
                 </span>
             </div>
