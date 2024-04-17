@@ -27,6 +27,8 @@ const Profile = () => {
     const [fileUploadError, setFileUploadError] = useState(null);
     const [formData, setFormData] = useState({});
     const [updateSuccess, setUpdateSuccess] = useState(false);
+    const [showListingsError, setShowListingsError] = useState(false);
+    const [userListings, setUserListings] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -124,6 +126,20 @@ const Profile = () => {
         }
     };
 
+    const handleShowListings = async () => {
+        try {
+            setShowListingsError(false);
+            const res = await fetch(`/api/user/listings/${currentUser._id}`);
+            const data = await res.json();
+
+            if (data.success === false) setShowListingsError(true);
+
+            setUserListings(data);
+        } catch (error) {
+            setShowListingsError(error);
+        }
+    };
+
     return (
         <div className='p-3 max-w-lg mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-8'>Profile</h1>
@@ -215,6 +231,49 @@ const Profile = () => {
             <p className='text-center text-green-500 mt-4'>
                 {updateSuccess ? 'User is updated successfully!' : ''}
             </p>
+
+            <button
+                onClick={handleShowListings}
+                className='text-green-700 w-full'
+            >
+                Show Listings
+            </button>
+            <p className='text-red-700'>{showListingsError && showListingsError}</p>
+
+            {userListings && userListings.length > 0 && (
+                <div className='flex flex-col gap-4'>
+                    <h1 className='text-center mt-7 text-2xl font-semibold'>Your Listings</h1>
+
+                    {userListings.map((listing) => {
+                        const { _id, name, imageUrls } = listing;
+                        return (
+                            <div
+                                key={_id}
+                                className='border rounded-lg p-3 mt-4 flex items-center justify-between gap-4'
+                            >
+                                <Link to={`/listing/${listing._id}`}>
+                                    <img
+                                        src={imageUrls[0]}
+                                        alt='listing cover'
+                                        className='h-16 w-16 object-contain'
+                                    />
+                                </Link>
+
+                                <Link
+                                    to={`/listing/${listing._id}`}
+                                    className='text-slate-700 font-semibold hover:underline truncate flex-1'
+                                >
+                                    <p>{name}</p>
+                                </Link>
+                                <div className='flex flex-col items-center'>
+                                    <button className='text-red-700 uppercase'>Delete</button>
+                                    <button className='text-green-700 uppercase'>Edit</button>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
         </div>
     );
 };
