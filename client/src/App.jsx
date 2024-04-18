@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import Profile from './pages/Profile';
 import About from './pages/About';
 import CreateListing from './pages/CreateListing';
+import UpdateListing from './pages/UpdateListing';
 
 //components
 import Header from './components/Header.component';
@@ -42,6 +43,10 @@ const App = () => {
                     <Route
                         path='/create-listing'
                         element={<CreateListing />}
+                    />
+                    <Route
+                        path='/update-listing/:listingId'
+                        element={<UpdateListing />}
                     />
                 </Route>
             </Routes>
