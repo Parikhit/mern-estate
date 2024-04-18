@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import Contact from '../components/Contact.component';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -23,8 +26,11 @@ const Listing = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [copied, setCopied] = useState(false);
+    const [contact, setContact] = useState(false);
 
     const params = useParams();
+    const { currentUser } = useSelector((state) => state.user);
+
     useEffect(() => {
         const fetchListing = async () => {
             try {
@@ -144,6 +150,16 @@ const Listing = () => {
                                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
                             </li>
                         </ul>
+
+                        {currentUser && listing.userRef !== currentUser._id && !contact && (
+                            <button
+                                onClick={() => setContact(true)}
+                                className='bg-slate-700 text-white uppercase rounded-lg hover:opacity-85 p-3'
+                            >
+                                Contact Landlord
+                            </button>
+                        )}
+                        {contact && <Contact listing={listing} />}
                     </div>
                 </div>
             )}
