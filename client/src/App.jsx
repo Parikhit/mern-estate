@@ -9,6 +9,7 @@ import About from './pages/About';
 import CreateListing from './pages/CreateListing';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 //components
 import Header from './components/Header.component';
@@ -35,6 +36,10 @@ const App = () => {
                 <Route
                     path='/about'
                     element={<About />}
+                />
+                <Route
+                    path='/search'
+                    element={<Search />}
                 />
                 <Route
                     path='/listing/:listingId'
