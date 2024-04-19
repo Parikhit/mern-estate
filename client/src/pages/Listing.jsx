@@ -9,15 +9,7 @@ import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 
 import 'swiper/css/bundle';
-import {
-    FaBath,
-    FaBed,
-    FaChair,
-    FaMapMarkedAlt,
-    FaMapMarkerAlt,
-    FaParking,
-    FaShare,
-} from 'react-icons/fa';
+import { FaBath, FaBed, FaChair, FaMapMarkedAlt, FaParking, FaShare } from 'react-icons/fa';
 
 const Listing = () => {
     SwiperCore.use([Navigation]);
@@ -109,7 +101,7 @@ const Listing = () => {
                         </p>
 
                         <p className='flex items-center mt-6 gap-2 text-slate-600  text-base'>
-                            <FaMapMarkerAlt className='text-green-700' />
+                            <FaMapMarkedAlt className='text-green-700' />
                             {listing.address}
                         </p>
 
