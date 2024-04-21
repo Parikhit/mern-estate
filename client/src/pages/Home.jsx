@@ -6,6 +6,7 @@ import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 
 const ListingItem = lazy(() => import('../components/ListingItem.component'));
+
 import Spinner from '../components/Spinner.component';
 
 import 'swiper/swiper-bundle.css';
@@ -77,7 +78,6 @@ const Home = () => {
                     Let&apos;s get started...
                 </Link>
             </div>
-            <Spinner />
 
             <Swiper
                 className='m-4 rounded-lg shadow-lg'

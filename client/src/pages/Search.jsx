@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ListingItem from '../components/ListingItem.component';
+const ListingItem = lazy(() => import('../components/ListingItem.component'));
+
+import Spinner from '../components/Spinner.component';
 
 const Search = () => {
     const navigate = useNavigate();
@@ -242,15 +244,16 @@ const Search = () => {
                     {loading && (
                         <p className='text-lg text-slate-700 text-center w-full'>Loading...</p>
                     )}
-
-                    {!loading &&
-                        listings &&
-                        listings.map((listing, index) => (
-                            <ListingItem
-                                key={index}
-                                listing={listing}
-                            />
-                        ))}
+                    <Suspense fallback={<Spinner />}>
+                        {!loading &&
+                            listings &&
+                            listings.map((listing, index) => (
+                                <ListingItem
+                                    key={index}
+                                    listing={listing}
+                                />
+                            ))}
+                    </Suspense>
 
                     {showMore && (
                         <button
