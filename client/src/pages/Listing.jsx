@@ -49,7 +49,7 @@ const Listing = () => {
     }, [params.listingId]);
 
     return (
-        <main>
+        <main className='mb-[300px]'>
             {loading && <p className='text-center font-semibold my-20 text-2xl'>Loading...</p>}
             {error && (
                 <p className='text-center font-semibold my-20 text-2xl'>Something went wrong!</p>
