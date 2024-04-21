@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 
-import ListingItem from '../components/ListingItem.component';
+const ListingItem = lazy(() => import('../components/ListingItem.component'));
+import Spinner from '../components/Spinner.component';
 
 import 'swiper/swiper-bundle.css';
 
@@ -76,6 +77,7 @@ const Home = () => {
                     Let&apos;s get started...
                 </Link>
             </div>
+            <Spinner />
 
             <Swiper
                 className='m-4 rounded-lg shadow-lg'
@@ -110,12 +112,14 @@ const Home = () => {
                             Show More Offers
                         </Link>
                         <div className='flex flex-wrap gap-4'>
-                            {offerListings.map((listing) => (
-                                <ListingItem
-                                    listing={listing}
-                                    key={listing._id}
-                                />
-                            ))}
+                            <Suspense fallback={<Spinner />}>
+                                {offerListings.map((listing) => (
+                                    <ListingItem
+                                        listing={listing}
+                                        key={listing._id}
+                                    />
+                                ))}
+                            </Suspense>
                         </div>
                     </div>
                 )}
@@ -130,12 +134,14 @@ const Home = () => {
                             Show More Rent
                         </Link>
                         <div className='flex flex-wrap gap-4'>
-                            {rentListings.map((listing) => (
-                                <ListingItem
-                                    listing={listing}
-                                    key={listing._id}
-                                />
-                            ))}
+                            <Suspense fallback={<Spinner />}>
+                                {rentListings.map((listing) => (
+                                    <ListingItem
+                                        listing={listing}
+                                        key={listing._id}
+                                    />
+                                ))}
+                            </Suspense>
                         </div>
                     </div>
                 )}
@@ -150,12 +156,14 @@ const Home = () => {
                             Show More Sale
                         </Link>
                         <div className='flex flex-wrap gap-4'>
-                            {saleListings.map((listing) => (
-                                <ListingItem
-                                    listing={listing}
-                                    key={listing._id}
-                                />
-                            ))}
+                            <Suspense fallback={<Spinner />}>
+                                {saleListings.map((listing) => (
+                                    <ListingItem
+                                        listing={listing}
+                                        key={listing._id}
+                                    />
+                                ))}
+                            </Suspense>
                         </div>
                     </div>
                 )}
