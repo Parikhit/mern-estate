@@ -159,7 +159,7 @@ const Profile = () => {
     };
 
     return (
-        <div className='p-3 max-w-lg mx-auto'>
+        <div className='p-3 max-w-lg mx-auto mb-44'>
             <h1 className='text-3xl font-semibold text-center my-8'>Profile</h1>
 
             <form

@@ -25,10 +25,18 @@ const Header = () => {
     }, [location.search]);
 
     return (
-        <header className='bg-gray-200 shadow-md'>
-            <div className=' flex items-center justify-between max-w-6xl mx-auto p-6'>
-                <Link to='/'>
-                    <h1 className='text-2xl font-medium sm:text-3xl w-fit flex flex-wrap'>
+        <header className='bg-gray-200 shadow-md h-32 sm:h-28'>
+            <div className=' flex items-center justify-between max-w-6xl mx-auto p-3 sm:p-6'>
+                <div className='flex items-center gap-2'>
+                    <Link to='/'>
+                        <img
+                            className='rounded-2xl w-16 h-16'
+                            src='logo.jpeg'
+                            alt='logo'
+                        />
+                    </Link>
+
+                    <h1 className='text-xl font-medium sm:text-3xl w-fit flex flex-wrap'>
                         <span className='text-white bg-slate-950 px-2 py-1 rounded-l-md'>
                             Imperial{' '}
                         </span>
@@ -36,7 +44,7 @@ const Header = () => {
                             Properties
                         </span>
                     </h1>
-                </Link>
+                </div>
 
                 <form
                     onSubmit={handleSubmit}
@@ -54,7 +62,7 @@ const Header = () => {
                     </button>
                 </form>
 
-                <ul className='flex mx-2 gap-4 font-medium'>
+                <ul className='flex items-center mx-2 gap-4 font-medium'>
                     <Link to='/'>
                         <li className='hidden sm:inline text-slate-500 hover:text-black hover:animate-pulse'>
                             Home
@@ -68,7 +76,7 @@ const Header = () => {
                     <Link to='/profile'>
                         {currentUser ? (
                             <img
-                                className='rounded-full h-12 w-12 object-cover'
+                                className='rounded-full h-14 object-cover'
                                 src={currentUser.avatar}
                                 alt='profile-img'
                             />

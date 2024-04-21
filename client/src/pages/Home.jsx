@@ -54,8 +54,8 @@ const Home = () => {
     return (
         <>
             <div className='flex flex-col gap-6 p-12 max-w-5xl mx-auto'>
-                <div className='bg-gray-100 p-6 rounded-lg shadow-sm hover:shadow-md'>
-                    <h1 className='text-black font-bold text-3xl lg:text-6xl'>
+                <div className='bg-gray-100 text-center p-6 rounded-lg shadow-sm hover:shadow-md'>
+                    <h1 className='text-black font-bold text-3xl lg:text-5xl'>
                         Building dreams, one home at a time.
                         <br />
                         Find your <span className='text-blue-900'>perfect </span>
@@ -99,7 +99,7 @@ const Home = () => {
                     })}
             </Swiper>
 
-            <div className='w-4/5 mx-auto p-14 flex flex-col gap-6'>
+            <div className='w-9/10 mx-auto p-14 flex flex-col items-center gap-6'>
                 {offerListings && offerListings.length > 0 && (
                     <div>
                         <h2 className='text-2xl font-semibold'>Recent Offers</h2>
