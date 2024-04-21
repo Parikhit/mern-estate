@@ -20,12 +20,6 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client', 'dist', 'index.html'));
-});
-
 //Middleware to handle possible errors
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
@@ -37,6 +31,12 @@ mongoose
     .connect(process.env.MONGO)
     .then(() => console.log('Connected to MongoDB'))
     .catch((error) => console.log(error));
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client', 'dist', 'index.html'));
+});
 
 app.listen(3000, () => {
     console.log('Server is running on Port 3000!');
